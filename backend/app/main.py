@@ -112,9 +112,6 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
 
 
-@app.get("/")
-async def root():
-    return {"message": "CRM API is running"}
 
 
 @app.get("/health")
