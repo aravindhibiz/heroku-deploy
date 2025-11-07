@@ -2,8 +2,8 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from typing import List, Callable, Union
-from database import get_db
-from security import verify_token
+from core.database import get_db
+from core.security import verify_token
 from models.user import UserProfile
 from models.role import Role, Permission
 
