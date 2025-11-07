@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional, Any, Dict
 from datetime import datetime
 import uuid
-from .user import UserResponse
+from user import UserResponse
 
 
 class CompanyForActivity(BaseModel):

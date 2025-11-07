@@ -7,9 +7,9 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from ..repositories.role_repository import RoleRepository, PermissionRepository
-from ..models.role import Role, Permission
-from ..schemas.role import RoleCreate, RoleUpdate
+from repositories.role_repository import RoleRepository, PermissionRepository
+from models.role import Role, Permission
+from schemas.role import RoleCreate, RoleUpdate
 
 
 class RoleService:
@@ -229,7 +229,7 @@ class RoleService:
         Returns:
             Updated role or None
         """
-        from ..seeds.permissions_seed import get_default_role_permissions
+        from seeds.permissions_seed import get_default_role_permissions
 
         role = self.get_role_by_name(role_name)
 

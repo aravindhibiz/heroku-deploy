@@ -5,8 +5,8 @@ This service handles default configurations and initialization
 
 from sqlalchemy.orm import Session
 from typing import Dict, Any, List
-from ..models.system_config import SystemConfiguration
-from ..core.database import SessionLocal
+from models.system_config import SystemConfiguration
+from core.database import SessionLocal
 
 
 class SystemConfigManager:
@@ -300,7 +300,7 @@ class SystemConfigManager:
     def get_configuration_value(cls, key: str, db: Session = None) -> Any:
         """Get a configuration value by key"""
         if db is None:
-            from ..core.database import get_db
+            from core.database import get_db
             db = next(get_db())
             close_db = True
         else:

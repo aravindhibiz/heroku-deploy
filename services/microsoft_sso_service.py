@@ -11,7 +11,7 @@ import msal
 import requests
 import secrets
 from typing import Dict, Optional, Tuple
-from ..core.config import settings
+from core.config import settings
 
 
 class MicrosoftSSOService:

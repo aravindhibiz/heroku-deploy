@@ -2,8 +2,8 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 import uuid
-from .user import UserResponse
-from .company import CompanyBasicResponse
+from user import UserResponse
+from company import CompanyBasicResponse
 
 
 class ContactBase(BaseModel):

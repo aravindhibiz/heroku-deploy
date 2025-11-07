@@ -9,11 +9,11 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 
-from ..controllers.contact_controller import ContactController
-from ..schemas.contact import ContactCreate, ContactUpdate, ContactResponse, ContactWithRelations
-from ..core.database import get_db
-from ..core.auth import get_current_user, require_any_authenticated
-from ..models.user import UserProfile
+from controllers.contact_controller import ContactController
+from schemas.contact import ContactCreate, ContactUpdate, ContactResponse, ContactWithRelations
+from core.database import get_db
+from core.auth import get_current_user, require_any_authenticated
+from models.user import UserProfile
 
 
 router = APIRouter()

@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import datetime
 import uuid
-from ..models.email_template import TemplateCategory, TemplateStatus
+from models.email_template import TemplateCategory, TemplateStatus
 
 
 class EmailTemplateBase(BaseModel):

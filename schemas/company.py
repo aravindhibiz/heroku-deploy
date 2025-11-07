@@ -4,8 +4,8 @@ from datetime import datetime
 import uuid
 
 if TYPE_CHECKING:
-    from .contact import ContactResponse
-    from .deal import DealResponse
+    from contact import ContactResponse
+    from deal import DealResponse
 
 
 class CompanyBase(BaseModel):

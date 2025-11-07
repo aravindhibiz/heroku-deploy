@@ -8,16 +8,16 @@ from sqlalchemy.orm import Session
 from typing import List
 from uuid import UUID
 
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
-from ..schemas.activity import (
+from core.database import get_db
+from core.auth import get_current_user
+from models.user import UserProfile
+from schemas.activity import (
     ActivityCreate,
     ActivityUpdate,
     ActivityResponse,
     ActivityWithRelations
 )
-from ..controllers.activity_controller import ActivityController
+from controllers.activity_controller import ActivityController
 
 
 router = APIRouter()

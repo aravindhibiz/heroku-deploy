@@ -10,21 +10,21 @@ import calendar
 import random
 from sqlalchemy.orm import Session, Query
 
-from ..repositories.deal_repository import DealRepository
-from ..models.deal import Deal
-from ..models.user import UserProfile
-from ..models.company import Company
-from ..models.custom_field import EntityType
-from ..schemas.deal import (
+from repositories.deal_repository import DealRepository
+from models.deal import Deal
+from models.user import UserProfile
+from models.company import Company
+from models.custom_field import EntityType
+from schemas.deal import (
     DealCreate,
     DealUpdate,
     DealResponse,
     DealWithRelations
 )
-from ..schemas.user import UserResponse
-from ..schemas.contact import ContactResponse
-from ..schemas.company import CompanyBasicResponse
-from .custom_field_service import CustomFieldService
+from schemas.user import UserResponse
+from schemas.contact import ContactResponse
+from schemas.company import CompanyBasicResponse
+from custom_field_service import CustomFieldService
 
 
 class DealService:
@@ -658,7 +658,7 @@ class DealService:
         """
         try:
             # Import system config service
-            from ..services.system_config_service_new import SystemConfigService
+            from services.system_config_service_new import SystemConfigService
             config_service = SystemConfigService(self.db)
 
             # Extract custom fields
@@ -741,7 +741,7 @@ class DealService:
 
             # Check if deal value is required when updating value field
             if 'value' in update_dict:
-                from ..services.system_config_service_new import SystemConfigService
+                from services.system_config_service_new import SystemConfigService
                 config_service = SystemConfigService(self.db)
                 require_value = config_service.get_configuration_value(
                     'sales.require_deal_value',
@@ -971,7 +971,7 @@ class DealService:
         Returns:
             List[DealResponse]: List of inactive deals
         """
-        from ..services.system_config_service_new import SystemConfigService
+        from services.system_config_service_new import SystemConfigService
 
         # Get inactivity warning threshold from system configuration
         config_service = SystemConfigService(self.db)

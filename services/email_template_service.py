@@ -3,12 +3,12 @@ import json
 from typing import Dict, Any, Optional, List
 from datetime import datetime
 from sqlalchemy.orm import Session
-from ..models.email_template import EmailTemplate, EmailLog, TemplateStatus
-from ..models.user import UserProfile
-from ..models.contact import Contact
-from ..models.company import Company
-from ..models.deal import Deal
-from ..models.custom_field import CustomField, CustomFieldValue
+from models.email_template import EmailTemplate, EmailLog, TemplateStatus
+from models.user import UserProfile
+from models.contact import Contact
+from models.company import Company
+from models.deal import Deal
+from models.custom_field import CustomField, CustomFieldValue
 
 
 class EmailTemplateService:

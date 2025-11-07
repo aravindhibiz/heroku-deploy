@@ -21,8 +21,8 @@ from uuid import UUID
 import re
 from sqlalchemy.orm import Session
 
-from ..models.custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
-from ..repositories.custom_field_repository import CustomFieldRepository
+from models.custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
+from repositories.custom_field_repository import CustomFieldRepository
 
 
 class CustomFieldService:

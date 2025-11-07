@@ -5,8 +5,8 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from typing import Optional
 from uuid import UUID
-from .auth import has_permission
-from ..models.user import UserProfile
+from auth import has_permission
+from models.user import UserProfile
 
 
 def get_deals_query_filter(db: Session, current_user: UserProfile, base_query):
@@ -30,7 +30,7 @@ def get_deals_query_filter(db: Session, current_user: UserProfile, base_query):
         return base_query
     else:
         # Filter to own deals only
-        from ..models.deal import Deal
+        from models.deal import Deal
         return base_query.filter(Deal.owner_id == current_user.id)
 
 
@@ -85,7 +85,7 @@ def get_contacts_query_filter(db: Session, current_user: UserProfile, base_query
         return base_query
     else:
         # Filter to own contacts only
-        from ..models.contact import Contact
+        from models.contact import Contact
         return base_query.filter(Contact.owner_id == current_user.id)
 
 
@@ -110,7 +110,7 @@ def get_companies_query_filter(db: Session, current_user: UserProfile, base_quer
         return base_query
     else:
         # Filter to own companies only
-        from ..models.company import Company
+        from models.company import Company
         return base_query.filter(Company.owner_id == current_user.id)
 
 
@@ -195,7 +195,7 @@ def get_activities_query_filter(db: Session, current_user: UserProfile, base_que
         return base_query
     else:
         # Filter to activities for own contacts only
-        from ..models.activity import Activity
+        from models.activity import Activity
         return base_query.filter(Activity.user_id == current_user.id)
 
 
@@ -250,7 +250,7 @@ def get_campaigns_query_filter(db: Session, current_user: UserProfile, base_quer
         return base_query
     else:
         # Filter to own campaigns only
-        from ..models.campaign import Campaign
+        from models.campaign import Campaign
         return base_query.filter(Campaign.owner_id == current_user.id)
 
 

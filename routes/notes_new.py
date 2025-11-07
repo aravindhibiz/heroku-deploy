@@ -31,11 +31,11 @@ from typing import List, Optional
 from uuid import UUID
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..schemas.note import NoteCreate, NoteUpdate, NoteResponse
-from ..models.user import UserProfile
-from ..controllers.note_controller import NoteController
+from core.database import get_db
+from core.auth import get_current_user
+from schemas.note import NoteCreate, NoteUpdate, NoteResponse
+from models.user import UserProfile
+from controllers.note_controller import NoteController
 
 
 router = APIRouter(tags=["Notes"])

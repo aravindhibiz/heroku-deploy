@@ -8,15 +8,15 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..models.user import UserProfile
-from ..schemas.company import (
+from models.user import UserProfile
+from schemas.company import (
     CompanyCreate,
     CompanyUpdate,
     CompanyResponse
 )
-from ..services.company_service import CompanyService
-from ..core.auth import has_permission
-from ..core.auth_helpers import (
+from services.company_service import CompanyService
+from core.auth import has_permission
+from core.auth_helpers import (
     get_companies_query_filter,
     check_company_edit_permission,
     check_company_delete_permission

@@ -8,8 +8,8 @@ from uuid import UUID
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import func
 
-from ..repositories.base_repository import BaseRepository
-from ..models.role import Role, Permission, role_permissions
+from repositories.base_repository import BaseRepository
+from models.role import Role, Permission, role_permissions
 
 
 class RoleRepository(BaseRepository[Role]):

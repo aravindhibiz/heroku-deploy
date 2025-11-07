@@ -8,11 +8,11 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
-from ..controllers.company_controller import CompanyController
-from ..schemas.company import CompanyCreate, CompanyUpdate, CompanyResponse
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
+from controllers.company_controller import CompanyController
+from schemas.company import CompanyCreate, CompanyUpdate, CompanyResponse
+from core.database import get_db
+from core.auth import get_current_user
+from models.user import UserProfile
 
 
 router = APIRouter()

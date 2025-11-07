@@ -4,17 +4,17 @@ from sqlalchemy import func, or_
 from typing import List, Optional
 from uuid import UUID
 
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
-from ..models.email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
-from ..schemas.email_template import (
+from core.database import get_db
+from core.auth import get_current_user
+from models.user import UserProfile
+from models.email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
+from schemas.email_template import (
     EmailTemplateCreate, EmailTemplateUpdate, EmailTemplateResponse,
     EmailTemplateListResponse, SendEmailRequest, SendEmailResponse,
     EmailLogResponse, MergeFieldsResponse, MergeField,
     TemplatePreviewRequest, TemplatePreviewResponse
 )
-from ..services.email_template_service import EmailTemplateService
+from services.email_template_service import EmailTemplateService
 
 router = APIRouter()
 

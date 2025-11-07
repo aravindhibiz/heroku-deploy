@@ -10,14 +10,14 @@ from fastapi.responses import FileResponse, StreamingResponse
 from sqlalchemy.orm import Session
 from io import BytesIO
 
-from ..controllers.deal_controller import DealController
-from ..schemas.deal import DealCreate, DealUpdate, DealResponse, DealWithRelations
-from ..schemas.deal_document import DealDocumentResponse
-from ..services.deal_document_service import DealDocumentService
-from ..services.file_storage_factory import get_file_storage_service
-from ..core.database import get_db
-from ..core.auth import get_current_user, require_any_authenticated
-from ..models.user import UserProfile
+from controllers.deal_controller import DealController
+from schemas.deal import DealCreate, DealUpdate, DealResponse, DealWithRelations
+from schemas.deal_document import DealDocumentResponse
+from services.deal_document_service import DealDocumentService
+from services.file_storage_factory import get_file_storage_service
+from core.database import get_db
+from core.auth import get_current_user, require_any_authenticated
+from models.user import UserProfile
 
 
 router = APIRouter()
@@ -156,7 +156,7 @@ async def get_inactive_deals(
     **Returns:**
     - List of inactive deals with full details
     """
-    from ..services.deal_service import DealService
+    from services.deal_service import DealService
 
     deal_service = DealService(db)
     inactive_deals = deal_service.get_inactive_deals(current_user=current_user)
@@ -330,7 +330,7 @@ async def export_deals(
     **Returns:** List of deals with all details including relationships
     (company, contact, owner) suitable for CSV/JSON export.
     """
-    from ..core.auth import has_permission
+    from core.auth import has_permission
     from fastapi import HTTPException
 
     # Check export permission

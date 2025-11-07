@@ -7,16 +7,16 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from ..repositories.company_repository import CompanyRepository
-from ..models.company import Company
-from ..models.user import UserProfile
-from ..models.custom_field import EntityType
-from ..schemas.company import (
+from repositories.company_repository import CompanyRepository
+from models.company import Company
+from models.user import UserProfile
+from models.custom_field import EntityType
+from schemas.company import (
     CompanyCreate,
     CompanyUpdate,
     CompanyResponse
 )
-from .custom_field_service import CustomFieldService
+from custom_field_service import CustomFieldService
 
 
 class CompanyService:

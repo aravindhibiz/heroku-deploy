@@ -8,8 +8,8 @@ from uuid import UUID
 from sqlalchemy.orm import Session, Query, joinedload
 from sqlalchemy import desc
 
-from .base_repository import BaseRepository
-from ..models.activity import Activity
+from base_repository import BaseRepository
+from models.activity import Activity
 
 
 class ActivityRepository(BaseRepository[Activity]):

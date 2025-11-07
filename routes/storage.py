@@ -3,9 +3,9 @@ Storage configuration API routes.
 """
 
 from fastapi import APIRouter, Depends
-from ..core.storage_config import StorageConfig, get_storage_config
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
+from core.storage_config import StorageConfig, get_storage_config
+from core.auth import get_current_user
+from models.user import UserProfile
 
 
 router = APIRouter()
@@ -44,7 +44,7 @@ async def check_storage_health(
     """
     Check storage backend health and connectivity.
     """
-    from ..services.file_storage_factory import get_file_storage_service
+    from services.file_storage_factory import get_file_storage_service
 
     try:
         storage_service = get_file_storage_service()

@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import and_
 from typing import Dict, Any, List, Optional
-from ..models.custom_field import CustomField, CustomFieldValue, EntityType
-from ..schemas.custom_field import CustomFieldWithValue
+from models.custom_field import CustomField, CustomFieldValue, EntityType
+from schemas.custom_field import CustomFieldWithValue
 
 
 class CustomFieldService:

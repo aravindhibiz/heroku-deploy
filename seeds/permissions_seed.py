@@ -5,12 +5,12 @@ Run this script to initialize or reset the permission system
 """
 
 from sqlalchemy.orm import Session
-from ..core.database import SessionLocal
+from core.database import SessionLocal
 
 # Import all models to ensure they're registered with SQLAlchemy
 # This prevents the "failed to locate a name" error
 import app.models  # This imports all models from __init__.py
-from ..models.role import Role, Permission
+from models.role import Role, Permission
 
 
 def get_all_permissions():

@@ -3,22 +3,22 @@ from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 from datetime import timedelta
 from typing import List, Dict, Optional
-from ..core.database import get_db
-from ..core.security import create_access_token, verify_password, get_password_hash
-from ..core.config import settings
-from ..core.auth import get_current_user, get_user_permissions
-from ..models.user import UserProfile
-from ..models.password_reset_token import PasswordResetToken
-from ..schemas.user import (
+from core.database import get_db
+from core.security import create_access_token, verify_password, get_password_hash
+from core.config import settings
+from core.auth import get_current_user, get_user_permissions
+from models.user import UserProfile
+from models.password_reset_token import PasswordResetToken
+from schemas.user import (
     UserCreate, UserLogin, Token, UserResponse,
     ForgotPasswordRequest, ForgotPasswordResponse,
     ResetPasswordRequest, ResetPasswordResponse,
     MicrosoftSSOLogin
 )
-from ..services.smtp_service import SMTPService
-from ..services.microsoft_sso_service import microsoft_sso_service
-from ..services.user_service import UserService
-from ..services.system_config_service_new import SystemConfigService
+from services.smtp_service import SMTPService
+from services.microsoft_sso_service import microsoft_sso_service
+from services.user_service import UserService
+from services.system_config_service_new import SystemConfigService
 import secrets
 import urllib.parse
 

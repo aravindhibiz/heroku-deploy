@@ -7,7 +7,7 @@ import uuid
 import logging
 from typing import Protocol, Union
 from fastapi import HTTPException, status
-from .azure_blob_service import AzureBlobStorageService
+from azure_blob_service import AzureBlobStorageService
 
 logger = logging.getLogger(__name__)
 
@@ -197,7 +197,7 @@ class FileStorageFactory:
 # Dependency function for FastAPI
 def get_file_storage_service() -> Union[LocalFileStorage, AzureBlobStorageService]:
     """Get the configured file storage service."""
-    from ..core.config import settings
+    from core.config import settings
 
     # Use settings instead of direct os.getenv
     storage_backend = settings.STORAGE_BACKEND

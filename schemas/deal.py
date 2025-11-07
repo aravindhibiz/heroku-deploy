@@ -3,9 +3,9 @@ from typing import Optional, List, Dict, Any
 from datetime import datetime
 from decimal import Decimal
 import uuid
-from .user import UserResponse
-from .contact import ContactResponse
-from .company import CompanyBasicResponse
+from user import UserResponse
+from contact import ContactResponse
+from company import CompanyBasicResponse
 
 
 class DealBase(BaseModel):

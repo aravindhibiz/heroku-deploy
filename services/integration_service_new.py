@@ -9,13 +9,13 @@ from datetime import datetime, timedelta
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from ..repositories.integration_repository import (
+from repositories.integration_repository import (
     IntegrationRepository,
     IntegrationLogRepository,
     IntegrationWebhookRepository
 )
-from ..models.integration import Integration, IntegrationLog
-from ..schemas.integration import IntegrationCreate, IntegrationUpdate
+from models.integration import Integration, IntegrationLog
+from schemas.integration import IntegrationCreate, IntegrationUpdate
 
 
 class IntegrationService:
@@ -640,7 +640,7 @@ class IntegrationService:
         if provider in ['gmail', 'google_calendar']:
             try:
                 from google_auth_oauthlib.flow import Flow
-                from ..core.config import settings
+                from core.config import settings
 
                 # OAuth scopes per provider
                 scopes = {
@@ -726,7 +726,7 @@ class IntegrationService:
         if provider in ['gmail', 'google_calendar']:
             try:
                 from google_auth_oauthlib.flow import Flow
-                from ..core.config import settings
+                from core.config import settings
 
                 scopes = {
                     'gmail': [
@@ -771,7 +771,7 @@ class IntegrationService:
                         else "Google Calendar Integration"
                     )
 
-                    from ..models.integration import Integration as IntegrationModel
+                    from models.integration import Integration as IntegrationModel
                     integration = IntegrationModel(
                         user_id=user_id,
                         provider=provider,

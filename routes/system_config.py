@@ -2,17 +2,17 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from typing import List, Dict, Any, Optional
 from datetime import datetime
-from ..core.database import get_db
-from ..core.auth import get_current_user, require_admin
-from ..models.user import UserProfile
-from ..models.system_config import SystemConfiguration
-from ..schemas.system_config import (
+from core.database import get_db
+from core.auth import get_current_user, require_admin
+from models.user import UserProfile
+from models.system_config import SystemConfiguration
+from schemas.system_config import (
     SystemConfigResponse, SystemConfigBulkUpdate, SystemConfigBulkUpdateRequest,
     SystemConfigBulkUpdateItem, SystemConfigCreate, SystemConfigUpdate,
     SystemConfigCategoryResponse, SystemConfigSchemaResponse, SystemConfigExportResponse,
     SystemConfigValidationResponse, SystemConfigBulkUpdateRequestNew
 )
-from ..services.system_config_service import SystemConfigManager
+from services.system_config_service import SystemConfigManager
 
 router = APIRouter()
 

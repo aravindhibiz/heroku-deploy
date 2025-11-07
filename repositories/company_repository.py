@@ -8,8 +8,8 @@ from uuid import UUID
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import desc, asc
 
-from .base_repository import BaseRepository
-from ..models.company import Company
+from base_repository import BaseRepository
+from models.company import Company
 
 
 class CompanyRepository(BaseRepository[Company]):

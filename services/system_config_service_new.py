@@ -22,8 +22,8 @@ import re
 from datetime import datetime
 from sqlalchemy.orm import Session
 
-from ..models.system_config import SystemConfiguration
-from ..repositories.system_config_repository import SystemConfigRepository
+from models.system_config import SystemConfiguration
+from repositories.system_config_repository import SystemConfigRepository
 
 
 # Default configuration values organized by category

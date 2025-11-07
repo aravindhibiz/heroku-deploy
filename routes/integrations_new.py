@@ -8,11 +8,11 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
-from ..controllers.integration_controller import IntegrationController
-from ..schemas.integration import (
+from core.database import get_db
+from core.auth import get_current_user
+from models.user import UserProfile
+from controllers.integration_controller import IntegrationController
+from schemas.integration import (
     IntegrationResponse,
     IntegrationCreate,
     IntegrationUpdate,

@@ -34,17 +34,17 @@ from typing import List, Optional, Any
 from uuid import UUID
 from fastapi import APIRouter, Depends, Query, UploadFile, File, Form
 from sqlalchemy.orm import Session
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
-from ..models.email_template import TemplateCategory, TemplateStatus
-from ..schemas.email_template import (
+from core.database import get_db
+from core.auth import get_current_user
+from models.user import UserProfile
+from models.email_template import TemplateCategory, TemplateStatus
+from schemas.email_template import (
     EmailTemplateCreate, EmailTemplateUpdate, EmailTemplateResponse,
     EmailTemplateListResponse, SendEmailRequest, SendEmailResponse,
     EmailLogResponse, MergeFieldsResponse,
     TemplatePreviewRequest, TemplatePreviewResponse
 )
-from ..controllers.email_template_controller import EmailTemplateController
+from controllers.email_template_controller import EmailTemplateController
 
 
 router = APIRouter(tags=["Email Templates"])

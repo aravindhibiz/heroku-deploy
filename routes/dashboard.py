@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import func
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
-from ..models.contact import Contact
-from ..models.deal import Deal
-from ..models.activity import Activity
-from ..models.task import Task
+from core.database import get_db
+from core.auth import get_current_user
+from models.user import UserProfile
+from models.contact import Contact
+from models.deal import Deal
+from models.activity import Activity
+from models.task import Task
 from datetime import datetime, timedelta
 
 router = APIRouter()

@@ -9,8 +9,8 @@ from datetime import datetime
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import and_, or_
 
-from ..models.task import Task
-from .base_repository import BaseRepository
+from models.task import Task
+from base_repository import BaseRepository
 
 
 class TaskRepository(BaseRepository[Task]):

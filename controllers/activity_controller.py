@@ -8,17 +8,17 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..services.activity_service import ActivityService
-from ..models.user import UserProfile
-from ..models.activity import Activity
-from ..schemas.activity import (
+from services.activity_service import ActivityService
+from models.user import UserProfile
+from models.activity import Activity
+from schemas.activity import (
     ActivityCreate,
     ActivityUpdate,
     ActivityResponse,
     ActivityWithRelations
 )
-from ..core.auth import has_any_permission
-from ..core.auth_helpers import (
+from core.auth import has_any_permission
+from core.auth_helpers import (
     get_activities_query_filter,
     check_activity_edit_permission,
     check_activity_delete_permission

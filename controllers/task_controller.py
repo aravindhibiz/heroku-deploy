@@ -8,9 +8,9 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..services.task_service import TaskService
-from ..schemas.task import TaskResponse, TaskCreate, TaskUpdate, TaskStatistics
-from ..models.user import UserProfile
+from services.task_service import TaskService
+from schemas.task import TaskResponse, TaskCreate, TaskUpdate, TaskStatistics
+from models.user import UserProfile
 
 
 class TaskController:

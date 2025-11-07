@@ -7,10 +7,10 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from ..repositories.task_repository import TaskRepository
-from ..models.task import Task
-from ..models.user import UserProfile
-from ..schemas.task import TaskCreate, TaskUpdate
+from repositories.task_repository import TaskRepository
+from models.task import Task
+from models.user import UserProfile
+from schemas.task import TaskCreate, TaskUpdate
 
 
 class TaskService:

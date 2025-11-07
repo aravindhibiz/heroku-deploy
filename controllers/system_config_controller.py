@@ -20,9 +20,9 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..models.system_config import SystemConfiguration
-from ..services.system_config_service_new import SystemConfigService
-from ..schemas.system_config import (
+from models.system_config import SystemConfiguration
+from services.system_config_service_new import SystemConfigService
+from schemas.system_config import (
     SystemConfigCreate,
     SystemConfigUpdate,
     SystemConfigResponse,

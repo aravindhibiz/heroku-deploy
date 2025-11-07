@@ -8,10 +8,10 @@ from uuid import UUID
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import or_, and_, func
 
-from ..models.contact import Contact
-from ..models.company import Company
-from ..models.activity import Activity
-from .base_repository import BaseRepository
+from models.contact import Contact
+from models.company import Company
+from models.activity import Activity
+from base_repository import BaseRepository
 
 
 class ContactRepository(BaseRepository[Contact]):

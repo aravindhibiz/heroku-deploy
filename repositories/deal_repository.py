@@ -9,9 +9,9 @@ from datetime import datetime, timedelta
 from sqlalchemy.orm import Session, Query, joinedload
 from sqlalchemy import and_, or_, func
 
-from .base_repository import BaseRepository
-from ..models.deal import Deal
-from ..models.company import Company
+from base_repository import BaseRepository
+from models.deal import Deal
+from models.company import Company
 
 
 class DealRepository(BaseRepository[Deal]):

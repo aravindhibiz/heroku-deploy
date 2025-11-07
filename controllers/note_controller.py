@@ -19,9 +19,9 @@ from typing import List, Optional
 from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from ..schemas.note import NoteCreate, NoteUpdate, NoteResponse
-from ..models.user import UserProfile
-from ..services.note_service import NoteService
+from schemas.note import NoteCreate, NoteUpdate, NoteResponse
+from models.user import UserProfile
+from services.note_service import NoteService
 
 
 class NoteController:

@@ -27,10 +27,10 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
-from ..core.database import get_db
-from ..core.auth import require_admin
-from ..controllers.system_config_controller import SystemConfigController
-from ..schemas.system_config import (
+from core.database import get_db
+from core.auth import require_admin
+from controllers.system_config_controller import SystemConfigController
+from schemas.system_config import (
     SystemConfigCreate,
     SystemConfigUpdate,
     SystemConfigResponse,

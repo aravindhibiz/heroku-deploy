@@ -20,7 +20,7 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy import desc
 from sqlalchemy.orm import Session
-from ..models.system_config import SystemConfiguration
+from models.system_config import SystemConfiguration
 
 
 class SystemConfigRepository:

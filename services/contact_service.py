@@ -7,15 +7,15 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from ..repositories.contact_repository import ContactRepository
-from ..models.contact import Contact
-from ..models.company import Company
-from ..models.custom_field import EntityType
-from ..models.user import UserProfile
-from ..schemas.contact import ContactCreate, ContactUpdate, ContactWithRelations
-from ..schemas.user import UserResponse
-from ..schemas.company import CompanyBasicResponse
-from ..services.custom_field_service import CustomFieldService
+from repositories.contact_repository import ContactRepository
+from models.contact import Contact
+from models.company import Company
+from models.custom_field import EntityType
+from models.user import UserProfile
+from schemas.contact import ContactCreate, ContactUpdate, ContactWithRelations
+from schemas.user import UserResponse
+from schemas.company import CompanyBasicResponse
+from services.custom_field_service import CustomFieldService
 
 
 class ContactService:
@@ -78,9 +78,9 @@ class ContactService:
         Returns:
             List of contacts with activity counts, sorted by activity count descending
         """
-        from ..models.activity import Activity
-        from ..core.auth_helpers import get_activities_query_filter, get_contacts_query_filter
-        from ..models.contact import Contact
+        from models.activity import Activity
+        from core.auth_helpers import get_activities_query_filter, get_contacts_query_filter
+        from models.contact import Contact
 
         # Get contacts using the same permission logic
         contact_query = self.db.query(Contact)

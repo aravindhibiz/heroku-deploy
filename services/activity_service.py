@@ -7,18 +7,18 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy.orm import Session, Query, joinedload
 
-from ..repositories.activity_repository import ActivityRepository
-from ..models.activity import Activity
-from ..models.contact import Contact
-from ..models.user import UserProfile
-from ..models.custom_field import EntityType
-from ..schemas.activity import (
+from repositories.activity_repository import ActivityRepository
+from models.activity import Activity
+from models.contact import Contact
+from models.user import UserProfile
+from models.custom_field import EntityType
+from schemas.activity import (
     ActivityCreate,
     ActivityUpdate,
     ActivityResponse,
     ActivityWithRelations
 )
-from .custom_field_service import CustomFieldService
+from custom_field_service import CustomFieldService
 
 
 class ActivityService:

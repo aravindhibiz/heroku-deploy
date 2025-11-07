@@ -4,11 +4,11 @@ from sqlalchemy import and_, or_
 from typing import List, Optional, Dict, Any
 import re
 import uuid
-from ..core.database import get_db
-from ..core.auth import get_current_user, require_admin, require_manager_or_admin
-from ..models.user import UserProfile
-from ..models.custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
-from ..schemas.custom_field import (
+from core.database import get_db
+from core.auth import get_current_user, require_admin, require_manager_or_admin
+from models.user import UserProfile
+from models.custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
+from schemas.custom_field import (
     CustomFieldCreate, CustomFieldUpdate, CustomFieldResponse,
     CustomFieldValueCreate, CustomFieldValueUpdate, CustomFieldValueResponse,
     BulkCustomFieldValuesUpdate, CustomFieldWithValue, EntityWithCustomFields,

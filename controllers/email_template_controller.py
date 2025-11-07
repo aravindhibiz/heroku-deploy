@@ -19,15 +19,15 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
-from ..schemas.email_template import (
+from schemas.email_template import (
     EmailTemplateCreate, EmailTemplateUpdate, EmailTemplateResponse,
     EmailTemplateListResponse, SendEmailRequest, SendEmailResponse,
     EmailLogResponse, MergeFieldsResponse, MergeField,
     TemplatePreviewRequest, TemplatePreviewResponse,
     TemplateCategory, TemplateStatus
 )
-from ..models.user import UserProfile
-from ..services.email_template_service_new import EmailTemplateService
+from models.user import UserProfile
+from services.email_template_service_new import EmailTemplateService
 
 
 class EmailTemplateController:

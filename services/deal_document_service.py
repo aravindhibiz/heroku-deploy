@@ -8,10 +8,10 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 from fastapi import UploadFile, HTTPException, status
 
-from ..models.deal_document import DealDocument
-from ..models.deal import Deal
-from ..models.user import UserProfile
-from .file_storage_factory import get_file_storage_service
+from models.deal_document import DealDocument
+from models.deal import Deal
+from models.user import UserProfile
+from file_storage_factory import get_file_storage_service
 
 
 class DealDocumentService:

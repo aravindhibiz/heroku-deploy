@@ -8,17 +8,17 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session, Query
 
-from ..models.user import UserProfile
-from ..models.deal import Deal
-from ..schemas.deal import (
+from models.user import UserProfile
+from models.deal import Deal
+from schemas.deal import (
     DealCreate,
     DealUpdate,
     DealResponse,
     DealWithRelations
 )
-from ..services.deal_service import DealService
-from ..core.auth import has_permission
-from ..core.auth_helpers import (
+from services.deal_service import DealService
+from core.auth import has_permission
+from core.auth_helpers import (
     get_deals_query_filter,
     check_deal_edit_permission,
     check_deal_delete_permission

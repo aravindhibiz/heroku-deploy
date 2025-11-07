@@ -9,8 +9,8 @@ from datetime import datetime
 from sqlalchemy.orm import Session, joinedload
 from sqlalchemy import and_, or_, desc
 
-from .base_repository import BaseRepository
-from ..models.integration import Integration, IntegrationLog, IntegrationWebhook
+from base_repository import BaseRepository
+from models.integration import Integration, IntegrationLog, IntegrationWebhook
 
 
 class IntegrationRepository(BaseRepository[Integration]):

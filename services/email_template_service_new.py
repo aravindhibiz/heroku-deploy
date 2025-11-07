@@ -22,17 +22,17 @@ from typing import Dict, Any, Optional, List
 from datetime import datetime
 from uuid import UUID
 from sqlalchemy.orm import Session
-from ..models.email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
-from ..models.user import UserProfile
-from ..models.contact import Contact
-from ..models.company import Company
-from ..models.deal import Deal
-from ..models.custom_field import CustomField, CustomFieldValue, EntityType
-from ..schemas.email_template import (
+from models.email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
+from models.user import UserProfile
+from models.contact import Contact
+from models.company import Company
+from models.deal import Deal
+from models.custom_field import CustomField, CustomFieldValue, EntityType
+from schemas.email_template import (
     EmailTemplateCreate, EmailTemplateUpdate,
     SendEmailRequest, TemplatePreviewRequest
 )
-from ..repositories.email_template_repository import (
+from repositories.email_template_repository import (
     EmailTemplateRepository, EmailLogRepository
 )
 
@@ -674,11 +674,11 @@ class EmailTemplateService:
 
         # Get sender email from SMTP configuration (not from system config)
         # This ensures we use the authenticated SMTP user's email
-        from ..core.config import settings
+        from core.config import settings
         company_email = settings.FROM_EMAIL or "noreply@company.com"
 
         # Get company name for sender name from system configuration
-        from ..services.system_config_service_new import SystemConfigService
+        from services.system_config_service_new import SystemConfigService
         config_service = SystemConfigService(self.db)
         company_name = config_service.get_configuration_value(
             "general.company_name",
@@ -690,8 +690,8 @@ class EmailTemplateService:
         error_message = None
 
         try:
-            from ..services.smtp_service import SMTPService
-            from ..core.config import settings
+            from services.smtp_service import SMTPService
+            from core.config import settings
 
             # Initialize SMTP service
             smtp_service = SMTPService(
@@ -785,11 +785,11 @@ class EmailTemplateService:
 
         # Get sender email from SMTP configuration (not from system config)
         # This ensures we use the authenticated SMTP user's email
-        from ..core.config import settings
+        from core.config import settings
         company_email = settings.FROM_EMAIL or "noreply@company.com"
 
         # Get company name for sender name from system configuration
-        from ..services.system_config_service_new import SystemConfigService
+        from services.system_config_service_new import SystemConfigService
         config_service = SystemConfigService(self.db)
         company_name = config_service.get_configuration_value(
             "general.company_name",
@@ -801,8 +801,8 @@ class EmailTemplateService:
         error_message = None
 
         try:
-            from ..services.smtp_service import SMTPService
-            from ..core.config import settings
+            from services.smtp_service import SMTPService
+            from core.config import settings
 
             # Initialize SMTP service
             smtp_service = SMTPService(

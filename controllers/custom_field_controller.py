@@ -21,9 +21,9 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..models.custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
-from ..services.custom_field_service_new import CustomFieldService
-from ..schemas.custom_field import (
+from models.custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
+from services.custom_field_service_new import CustomFieldService
+from schemas.custom_field import (
     CustomFieldCreate,
     CustomFieldUpdate,
     CustomFieldResponse,

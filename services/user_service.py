@@ -7,10 +7,10 @@ from typing import List, Optional, Dict, Any, Tuple
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from ..repositories.user_repository import UserRepository
-from ..models.user import UserProfile
-from ..schemas.user import UserCreate, UserUpdate, UserInvite
-from ..core.security import get_password_hash, verify_password
+from repositories.user_repository import UserRepository
+from models.user import UserProfile
+from schemas.user import UserCreate, UserUpdate, UserInvite
+from core.security import get_password_hash, verify_password
 
 
 class UserService:

@@ -8,11 +8,11 @@ from uuid import UUID
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from ..core.database import get_db
-from ..core.auth import get_current_user
-from ..models.user import UserProfile
-from ..controllers.role_controller import RoleController, PermissionController
-from ..schemas.role import (
+from core.database import get_db
+from core.auth import get_current_user
+from models.user import UserProfile
+from controllers.role_controller import RoleController, PermissionController
+from schemas.role import (
     RoleResponse, RoleCreate, RoleUpdate,
     PermissionResponse, RolePermissionUpdate
 )

@@ -19,7 +19,7 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy import desc, and_, or_
 from sqlalchemy.orm import Session, joinedload
-from ..models.custom_field import (
+from models.custom_field import (
     CustomField,
     CustomFieldValue,
     FieldType,

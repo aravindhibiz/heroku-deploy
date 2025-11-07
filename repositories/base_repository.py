@@ -8,7 +8,7 @@ from uuid import UUID
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
-from ..core.database import Base
+from core.database import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 

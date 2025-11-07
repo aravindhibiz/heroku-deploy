@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Text, DateTime, Boolean
 from sqlalchemy.dialects.postgresql import UUID, JSON
 from sqlalchemy.sql import func
 import uuid
-from ..core.database import Base
+from core.database import Base
 
 
 class SystemConfiguration(Base):

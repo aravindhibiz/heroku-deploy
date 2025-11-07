@@ -19,7 +19,7 @@ from typing import List, Optional
 from uuid import UUID
 from sqlalchemy import desc
 from sqlalchemy.orm import Session, joinedload
-from ..models.note import Note
+from models.note import Note
 
 
 class NoteRepository:

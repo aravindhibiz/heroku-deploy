@@ -20,7 +20,7 @@ from typing import List, Optional, Dict, Any
 from uuid import UUID
 from sqlalchemy import desc, func, or_
 from sqlalchemy.orm import Session
-from ..models.email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
+from models.email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
 
 
 class EmailTemplateRepository:

@@ -8,12 +8,12 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..services.role_service import RoleService, PermissionService
-from ..schemas.role import (
+from services.role_service import RoleService, PermissionService
+from schemas.role import (
     RoleResponse, RoleCreate, RoleUpdate,
     PermissionResponse, RolePermissionUpdate
 )
-from ..models.user import UserProfile
+from models.user import UserProfile
 
 
 class RoleController:

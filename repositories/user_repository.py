@@ -8,8 +8,8 @@ from uuid import UUID
 from sqlalchemy.orm import Session
 from sqlalchemy import func, or_, and_
 
-from ..repositories.base_repository import BaseRepository
-from ..models.user import UserProfile
+from repositories.base_repository import BaseRepository
+from models.user import UserProfile
 
 
 class UserRepository(BaseRepository[UserProfile]):

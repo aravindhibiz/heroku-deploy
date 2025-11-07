@@ -4,7 +4,7 @@ from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 import uuid
 import enum
-from ..core.database import Base
+from core.database import Base
 
 
 class FieldType(str, enum.Enum):

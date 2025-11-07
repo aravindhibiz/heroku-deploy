@@ -32,11 +32,11 @@ from uuid import UUID
 from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
-from ..core.database import get_db
-from ..core.auth import get_current_user, require_manager_or_admin
-from ..models.user import UserProfile
-from ..controllers.custom_field_controller import CustomFieldController
-from ..schemas.custom_field import (
+from core.database import get_db
+from core.auth import get_current_user, require_manager_or_admin
+from models.user import UserProfile
+from controllers.custom_field_controller import CustomFieldController
+from schemas.custom_field import (
     CustomFieldCreate,
     CustomFieldUpdate,
     CustomFieldResponse,

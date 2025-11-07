@@ -18,10 +18,10 @@ Date: 2024
 from typing import List, Optional
 from uuid import UUID
 from sqlalchemy.orm import Session
-from ..models.note import Note
-from ..models.contact import Contact
-from ..schemas.note import NoteCreate, NoteUpdate
-from ..repositories.note_repository import NoteRepository
+from models.note import Note
+from models.contact import Contact
+from schemas.note import NoteCreate, NoteUpdate
+from repositories.note_repository import NoteRepository
 
 
 class NoteService:

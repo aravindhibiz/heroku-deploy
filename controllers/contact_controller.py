@@ -8,10 +8,10 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..services.contact_service import ContactService
-from ..schemas.contact import ContactCreate, ContactUpdate, ContactResponse
-from ..models.user import UserProfile
-from ..core.auth_helpers import (
+from services.contact_service import ContactService
+from schemas.contact import ContactCreate, ContactUpdate, ContactResponse
+from models.user import UserProfile
+from core.auth_helpers import (
     get_contacts_query_filter,
     check_contact_edit_permission,
     check_contact_delete_permission
@@ -58,7 +58,7 @@ class ContactController:
                 pass
 
         # Check permissions to determine owner filter
-        from ..models.contact import Contact
+        from models.contact import Contact
         query = self.db.query(Contact)
         filtered_query = get_contacts_query_filter(
             self.db, current_user, query)
@@ -129,7 +129,7 @@ class ContactController:
             )
 
         # Check permission
-        from ..models.contact import Contact
+        from models.contact import Contact
         contact = self.db.query(Contact).filter(
             Contact.id == contact_id).first()
 
@@ -196,7 +196,7 @@ class ContactController:
             HTTPException: If contact not found or update fails
         """
         # Check if contact exists
-        from ..models.contact import Contact
+        from models.contact import Contact
         contact = self.db.query(Contact).filter(
             Contact.id == contact_id).first()
 
@@ -252,7 +252,7 @@ class ContactController:
             HTTPException: If contact not found or delete fails
         """
         # Check if contact exists
-        from ..models.contact import Contact
+        from models.contact import Contact
         contact = self.db.query(Contact).filter(
             Contact.id == contact_id).first()
 

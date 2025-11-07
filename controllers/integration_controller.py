@@ -8,9 +8,9 @@ from uuid import UUID
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from ..services.integration_service_new import IntegrationService
-from ..models.user import UserProfile
-from ..schemas.integration import (
+from services.integration_service_new import IntegrationService
+from models.user import UserProfile
+from schemas.integration import (
     IntegrationResponse,
     IntegrationCreate,
     IntegrationUpdate,

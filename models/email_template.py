@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 import uuid
 import enum
-from ..core.database import Base
+from core.database import Base
 
 
 class TemplateCategory(enum.Enum):
