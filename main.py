@@ -2,10 +2,10 @@ from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
-from .core.database import engine, Base
-from .routes import auth, contacts_new, tasks_new, dashboard, users_new, roles_new, system_config_new, custom_fields_new, email_templates_new, integrations_new, notes_new, activities_new, companies_new, deals_new, storage, campaigns, prospects
+from core.database import engine, Base
+from routes import auth, contacts_new, tasks_new, dashboard, users_new, roles_new, system_config_new, custom_fields_new, email_templates_new, integrations_new, notes_new, activities_new, companies_new, deals_new, storage, campaigns, prospects
 # Import all models to ensure SQLAlchemy relationships are set up properly
-from . import models
+import models
 import traceback
 
 # Create all tables
