@@ -1,22 +1,22 @@
 # Import all models so SQLAlchemy can create proper relationships
-from user import UserProfile
-from password_reset_token import PasswordResetToken
-from contact import Contact
-from company import Company
-from deal import Deal
-from activity import Activity
-from task import Task
-from deal_document import DealDocument
-from custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
-from role import Role, Permission
-from email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
-from integration import Integration, IntegrationLog, IntegrationWebhook
-from note import Note
-from system_config import SystemConfiguration
-from prospect import Prospect, ProspectStatus, ProspectSource
-from campaign import Campaign, CampaignType, CampaignStatus
-from campaign_contact import CampaignContact, EngagementStatus
-from campaign_metric import CampaignMetric, LeadScoreHistory
+from models.user import UserProfile
+from models.password_reset_token import PasswordResetToken
+from models.contact import Contact
+from models.company import Company
+from models.deal import Deal
+from models.activity import Activity
+from models.task import Task
+from models.deal_document import DealDocument
+from models.custom_field import CustomField, CustomFieldValue, FieldType, EntityType, PlacementType
+from models.role import Role, Permission
+from models.email_template import EmailTemplate, EmailLog, TemplateCategory, TemplateStatus
+from models.integration import Integration, IntegrationLog, IntegrationWebhook
+from models.note import Note
+from models.system_config import SystemConfiguration
+from models.prospect import Prospect, ProspectStatus, ProspectSource
+from models.campaign import Campaign, CampaignType, CampaignStatus
+from models.campaign_contact import CampaignContact, EngagementStatus
+from models.campaign_metric import CampaignMetric, LeadScoreHistory
 
 __all__ = ['UserProfile', 'PasswordResetToken', 'Contact', 'Company',
            'Deal', 'Activity', 'Task', 'DealDocument',
