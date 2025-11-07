@@ -123,7 +123,7 @@ async def health_check():
 
 
 # Mount static files for React frontend (if dist folder exists)
-frontend_dist_path = Path(__file__) / "dist"
+frontend_dist_path = Path(__file__).parent / "dist"
 if frontend_dist_path.exists():
     # Mount static files (JS, CSS, images, etc.)
     app.mount("/assets", StaticFiles(directory=str(frontend_dist_path / "assets")), name="assets")
