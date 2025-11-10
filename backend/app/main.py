@@ -130,8 +130,8 @@ if frontend_dist_path.exists():
     # Custom 404 handler to serve React app for non-API routes
     @app.exception_handler(404)
     async def custom_404_handler(request: Request, exc):
-        # If it's an API route, return JSON 404
-        if request.url.path.startswith("/api"):
+        # Don't intercept API routes or assets - let them return proper 404
+        if request.url.path.startswith("/api") or request.url.path.startswith("/assets"):
             return JSONResponse(status_code=404, content={"detail": "Not found"})
 
         # For non-API routes, serve the React app (SPA)
