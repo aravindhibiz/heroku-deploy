@@ -121,19 +121,20 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 # IMPORTANT: This MUST be at the end, after all API routes are registered
 frontend_dist_path = Path(__file__).parent / "dist"
 if frontend_dist_path.exists():
-    # Serve index.html for root path
-    @app.get("/")
-    async def read_root():
+    # Mount static assets
+    app.mount("/assets", StaticFiles(directory=str(frontend_dist_path / "assets")), name="assets")
+    
+    # Custom 404 handler to serve React app for non-API routes
+    @app.exception_handler(404)
+    async def custom_404_handler(request: Request, exc):
+        # If it's an API route, return JSON 404
+        if request.url.path.startswith("/api"):
+            return JSONResponse(status_code=404, content={"detail": "Not found"})
+        
+        # For non-API routes, serve the React app (SPA)
         index_file = frontend_dist_path / "index.html"
         if index_file.exists():
             return FileResponse(str(index_file))
-        return JSONResponse(status_code=404, content={"detail": "Frontend not built"})
-    
-    # Mount static files AFTER defining root route but BEFORE catch-all
-    # This allows /assets/* to work but doesn't interfere with API routes
-    app.mount("/assets", StaticFiles(directory=str(frontend_dist_path / "assets")), name="assets")
-    
-    # Mount the entire dist folder as static files for React app
-    # HTMLResponse=True makes it serve index.html for directory requests
-    app.mount("/", StaticFiles(directory=str(frontend_dist_path), html=True), name="spa")
+        
+        return JSONResponse(status_code=404, content={"detail": "Page not found"})
 
