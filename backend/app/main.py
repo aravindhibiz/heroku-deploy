@@ -130,8 +130,8 @@ if frontend_dist_path.exists():
     @app.get("/{full_path:path}")
     async def serve_react_app(full_path: str):
         # Don't intercept API routes
-        if full_path.startswith("api/"):
-            return JSONResponse(status_code=404, content={"detail": "Not found"})
+        if full_path.startswith("api/") or full_path.startswith("api"):
+            return JSONResponse(status_code=404, content={"detail": "API endpoint not found"})
         
         # Serve index.html for all other routes (React Router will handle)
         index_file = frontend_dist_path / "index.html"
