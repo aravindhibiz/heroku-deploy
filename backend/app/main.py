@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, status
+from fastapi import FastAPI, Request, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.exceptions import RequestValidationError
@@ -35,6 +35,11 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all methods
     allow_headers=["*"],  # Allow all headers
 )
+
+# Health check route BEFORE routers
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
 
 # Include routers
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["authentication"])
@@ -112,26 +117,35 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
 
 
-
-
-@app.get("/health")
-async def health_check():
-    return {"status": "healthy"}
-
-
 # Mount static files for React frontend (if dist folder exists)
+# IMPORTANT: This MUST be at the end, after all API routes are registered
 frontend_dist_path = Path(__file__).parent / "dist"
 if frontend_dist_path.exists():
     # Mount static files (JS, CSS, images, etc.)
     app.mount("/assets", StaticFiles(directory=str(frontend_dist_path / "assets")), name="assets")
     
+    # Serve index.html for root path
+    @app.get("/")
+    async def read_root():
+        index_file = frontend_dist_path / "index.html"
+        if index_file.exists():
+            return FileResponse(str(index_file))
+        return JSONResponse(status_code=404, content={"detail": "Frontend not built"})
+    
     # Catch-all route to serve index.html for client-side routing
-    # This MUST be last to not interfere with API routes
+    # This MUST be last and MUST NOT match api/ paths
     @app.get("/{full_path:path}")
-    async def serve_react_app(full_path: str):
-        # Don't intercept API routes
-        if full_path.startswith("api/") or full_path.startswith("api"):
-            return JSONResponse(status_code=404, content={"detail": "API endpoint not found"})
+    async def serve_react_app(full_path: str, request: Request):
+        # For API routes, raise 404 to let FastAPI handle them properly
+        if full_path.startswith("api"):
+            raise HTTPException(status_code=404, detail="Not found")
+        
+        # Serve index.html for all other routes (React Router will handle)
+        index_file = frontend_dist_path / "index.html"
+        if index_file.exists():
+            return FileResponse(str(index_file))
+        
+        return JSONResponse(status_code=404, content={"detail": "Frontend not built"})
         
         # Serve index.html for all other routes (React Router will handle)
         index_file = frontend_dist_path / "index.html"
