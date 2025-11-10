@@ -136,11 +136,4 @@ if frontend_dist_path.exists():
     # Mount the entire dist folder as static files for React app
     # HTMLResponse=True makes it serve index.html for directory requests
     app.mount("/", StaticFiles(directory=str(frontend_dist_path), html=True), name="spa")
-        
-        # Serve index.html for all other routes (React Router will handle)
-        index_file = frontend_dist_path / "index.html"
-        if index_file.exists():
-            return FileResponse(str(index_file))
-        
-        return JSONResponse(status_code=404, content={"detail": "Frontend not built"})
 
