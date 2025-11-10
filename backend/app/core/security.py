@@ -4,7 +4,12 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from .config import settings
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# Configure bcrypt context with truncate_error=False to handle long passwords gracefully
+pwd_context = CryptContext(
+    schemes=["bcrypt"], 
+    deprecated="auto",
+    bcrypt__truncate_error=False  # Prevent error for passwords > 72 bytes
+)
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
