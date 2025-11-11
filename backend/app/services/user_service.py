@@ -450,8 +450,8 @@ class UserService:
         # Create user without password
         user_dict = {
             'email': email.lower().strip(),
-            'first_name': first_name.strip(),
-            'last_name': last_name.strip(),
+            'first_name': first_name.strip() if first_name else '',
+            'last_name': last_name.strip() if last_name else '',
             'role': role,
             'hashed_password': None,  # No password for SSO users
             'microsoft_id': microsoft_id,
