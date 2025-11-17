@@ -120,7 +120,7 @@ def get_company_info(db: Session) -> Dict[str, str]:
 
 @router.post("/login", response_model=Token)
 async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
-    from datetime import datetime
+    from datetime import datetime, timezone
 
     # Get security settings from system configuration
     config_service = SystemConfigService(db)
@@ -133,8 +133,9 @@ async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
 
     # Check if account is locked
     if user and user.account_locked_until:
-        if datetime.utcnow() < user.account_locked_until:
-            remaining_minutes = int((user.account_locked_until - datetime.utcnow()).total_seconds() / 60)
+        current_time = datetime.now(timezone.utc)
+        if current_time < user.account_locked_until:
+            remaining_minutes = int((user.account_locked_until - current_time).total_seconds() / 60)
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail=f"Account is locked due to too many failed login attempts. Please try again in {remaining_minutes} minutes.",
@@ -154,7 +155,7 @@ async def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
 
             # Lock account if max attempts reached
             if user.failed_login_attempts >= max_attempts:
-                user.account_locked_until = datetime.utcnow() + timedelta(minutes=lockout_minutes)
+                user.account_locked_until = datetime.now(timezone.utc) + timedelta(minutes=lockout_minutes)
                 db.commit()
                 raise HTTPException(
                     status_code=status.HTTP_403_FORBIDDEN,
