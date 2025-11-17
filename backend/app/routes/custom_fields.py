@@ -77,8 +77,7 @@ def validate_field_value(field_type: FieldType, value: str, field_config: Dict[s
                 return False
 
         return True
-    except Exception as e:
-        print(f"Validation error: {e}")
+    except Exception:
         return False
 
 # Custom Field Management Routes
@@ -128,7 +127,6 @@ async def create_custom_field(
         db.rollback()
         import traceback
         error_detail = f"Error creating custom field: {str(e)}\nTraceback: {traceback.format_exc()}"
-        print(error_detail)  # This will show in server logs
         raise HTTPException(status_code=500, detail=str(e))
 
 

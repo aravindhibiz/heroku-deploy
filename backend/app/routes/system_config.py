@@ -133,7 +133,6 @@ async def create_configuration(
 @router.get("/debug-test")
 async def debug_test_route():
     """Simple test route to verify routing is working"""
-    print("DEBUG: Simple test route called")
     return {"message": "Debug test successful", "timestamp": datetime.utcnow()}
 
 
@@ -142,7 +141,6 @@ async def test_bulk_update_route_no_auth(
     data: Dict[str, Any]
 ):
     """Test route without authentication to debug the bulk update issue"""
-    print(f"Raw test data received (no auth): {data}")
     return {"success": True, "received": data}
 
 
@@ -153,7 +151,6 @@ async def test_bulk_update_route(
     current_user: UserProfile = Depends(require_admin())
 ):
     """Test route to debug the bulk update issue"""
-    print(f"Raw test data received: {data}")
     return {"success": True, "received": data}
 
 
@@ -167,10 +164,8 @@ async def update_configurations_bulk_raw(
     try:
         # Get raw JSON from request
         raw_data = await request.json()
-        print(f"RAW ROUTE - Received data: {raw_data}")
 
         configurations = raw_data.get('configurations', [])
-        print(f"RAW ROUTE - Configurations count: {len(configurations)}")
 
         updated_count = 0
         errors = []
@@ -229,10 +224,6 @@ async def update_configurations_bulk_new(
     current_user: UserProfile = Depends(require_admin())
 ):
     """Update multiple configurations at once - new version"""
-    print(f"NEW ROUTE - Raw request received - Type: {type(update_data)}")
-    print(f"NEW ROUTE - Received bulk update request: {update_data}")
-    print(
-        f"NEW ROUTE - Configurations count: {len(update_data.configurations)}")
 
     updated_count = 0
     errors = []
@@ -292,11 +283,6 @@ async def update_configurations_bulk(
     current_user: UserProfile = Depends(require_admin())
 ):
     """Update multiple configurations at once"""
-    print(f"BULK ROUTE - Raw request received - Type: {type(update_data)}")
-    print(f"BULK ROUTE - Received bulk update request: {update_data}")
-    print(f"BULK ROUTE - Model dump: {update_data.model_dump()}")
-    print(
-        f"BULK ROUTE - Configurations count: {len(update_data.configurations)}")
 
     updated_count = 0
     errors = []
@@ -389,7 +375,6 @@ async def test_bulk_update_route_no_auth(
     data: Dict[str, Any]
 ):
     """Test route without authentication to debug the bulk update issue"""
-    print(f"Raw test data received (no auth): {data}")
     return {"success": True, "received": data}
 
 
@@ -400,14 +385,12 @@ async def test_bulk_update_route(
     current_user: UserProfile = Depends(require_admin())
 ):
     """Test route to debug the bulk update issue"""
-    print(f"Raw test data received: {data}")
     return {"success": True, "received": data}
 
 
 @router.get("/debug-test")
 async def debug_test_route():
     """Simple test route to verify routing is working"""
-    print("DEBUG: Simple test route called")
     return {"message": "Debug test successful", "timestamp": datetime.utcnow()}
 
 
@@ -421,10 +404,8 @@ async def update_configurations_bulk_raw(
     try:
         # Get raw JSON from request
         raw_data = await request.json()
-        print(f"RAW ROUTE - Received data: {raw_data}")
 
         configurations = raw_data.get('configurations', [])
-        print(f"RAW ROUTE - Configurations count: {len(configurations)}")
 
         updated_count = 0
         errors = []
@@ -483,10 +464,6 @@ async def update_configurations_bulk_new(
     current_user: UserProfile = Depends(require_admin())
 ):
     """Update multiple configurations at once - new version"""
-    print(f"NEW ROUTE - Raw request received - Type: {type(update_data)}")
-    print(f"NEW ROUTE - Received bulk update request: {update_data}")
-    print(
-        f"NEW ROUTE - Configurations count: {len(update_data.configurations)}")
 
     updated_count = 0
     errors = []
@@ -546,10 +523,6 @@ async def update_configurations_bulk(
     current_user: UserProfile = Depends(require_admin())
 ):
     """Update multiple configurations at once"""
-    print(f"Raw request received - Type: {type(update_data)}")
-    print(f"Received bulk update request: {update_data}")
-    print(f"Model dump: {update_data.model_dump()}")
-    print(f"Configurations count: {len(update_data.configurations)}")
 
     updated_count = 0
     errors = []

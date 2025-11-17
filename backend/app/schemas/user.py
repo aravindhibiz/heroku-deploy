@@ -61,6 +61,9 @@ class Token(BaseModel):
 
 class UserInvite(BaseModel):
     email: EmailStr
+    first_name: str
+    last_name: str
+    role: str
 
 
 class ForgotPasswordRequest(BaseModel):

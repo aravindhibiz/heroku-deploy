@@ -570,11 +570,6 @@ async def upload_deal_document(
         # Re-raise HTTP exceptions as-is
         raise
     except Exception as e:
-        # Log the actual error for debugging
-        import traceback
-        print(f"Upload error: {e}")
-        print(f"Traceback: {traceback.format_exc()}")
-
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to upload document: {str(e)}"

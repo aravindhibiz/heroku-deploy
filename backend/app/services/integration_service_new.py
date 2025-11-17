@@ -41,6 +41,12 @@ class IntegrationService:
             'auth_type': 'oauth2',
             'features': ['calendar_sync', 'event_sync', 'meeting_sync']
         },
+        'outlook_calendar': {
+            'name': 'Microsoft Outlook Calendar',
+            'description': 'Two-way calendar sync with Outlook',
+            'auth_type': 'oauth2',
+            'features': ['calendar_sync', 'meeting_scheduling', 'teams_meetings', 'activity_tracking']
+        },
         'twilio': {
             'name': 'Twilio',
             'description': 'SMS and calling integration',

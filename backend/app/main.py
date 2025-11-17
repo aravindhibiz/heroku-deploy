@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse, FileResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.staticfiles import StaticFiles
 from .core.database import engine, Base
-from .routes import auth, contacts_new, tasks_new, dashboard, users_new, roles_new, system_config_new, custom_fields_new, email_templates_new, integrations_new, notes_new, activities_new, companies_new, deals_new, storage, campaigns, prospects
+from .routes import auth, contacts_new, tasks_new, dashboard, users_new, roles_new, system_config_new, custom_fields_new, email_templates_new, integrations_new, notes_new, activities_new, companies_new, deals_new, storage, campaigns, prospects, calendar_integration
 # Import all models to ensure SQLAlchemy relationships are set up properly
 from . import models
 import traceback
@@ -15,17 +15,6 @@ from pathlib import Path
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="CRM API", version="1.0.0")
-
-# Add request logging middleware for debugging
-
-
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    print(f"DEBUG: Incoming request - {request.method} {request.url}")
-    print(f"DEBUG: Headers: {dict(request.headers)}")
-    response = await call_next(request)
-    print(f"DEBUG: Response status: {response.status_code}")
-    return response
 
 # CORS middleware - MUST be added BEFORE routes
 app.add_middleware(
@@ -64,6 +53,8 @@ app.include_router(email_templates_new.router,
                    prefix="/api/v1/email-templates", tags=["email-templates"])
 app.include_router(integrations_new.router,
                    prefix="/api/v1/integrations", tags=["integrations"])
+app.include_router(calendar_integration.router,
+                   prefix="/api/v1/calendar-integration", tags=["calendar-integration"])
 app.include_router(notes_new.router, prefix="/api/v1/notes", tags=["notes"])
 app.include_router(storage.router, prefix="/api/v1/storage", tags=["storage"])
 app.include_router(

@@ -18,7 +18,7 @@ class DealBase(BaseModel):
     description: Optional[str] = None
     source: Optional[str] = None
     next_action: Optional[str] = None
-
+    
     @field_validator('expected_close_date', mode='before')
     @classmethod
     def parse_date(cls, v):
@@ -58,7 +58,7 @@ class DealUpdate(BaseModel):
     source: Optional[str] = None
     lost_reason: Optional[str] = None
     next_action: Optional[str] = None
-
+    
     @field_validator('expected_close_date', 'actual_close_date', mode='before')
     @classmethod
     def parse_date(cls, v):

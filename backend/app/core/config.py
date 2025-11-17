@@ -32,6 +32,9 @@ class Settings(BaseSettings):
     MICROSOFT_REDIRECT_URI: Optional[str] = None
     MICROSOFT_SCOPES: str = "openid email profile User.Read"
 
+    # Microsoft Calendar OAuth settings
+    MICROSOFT_CALENDAR_REDIRECT_URI: Optional[str] = None
+
     # Integration settings
     INTEGRATION_ENCRYPTION_KEY: Optional[str] = None
 

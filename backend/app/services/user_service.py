@@ -6,11 +6,15 @@ Handles user management, invitations, password changes, statistics, and SSO inte
 from typing import List, Optional, Dict, Any, Tuple
 from uuid import UUID
 from sqlalchemy.orm import Session
+import os
 
 from ..repositories.user_repository import UserRepository
 from ..models.user import UserProfile
+from ..models.password_reset_token import PasswordResetToken
 from ..schemas.user import UserCreate, UserUpdate, UserInvite
 from ..core.security import get_password_hash, verify_password
+from ..services.smtp_service import SMTPService
+from ..core.config import settings
 
 
 class UserService:
@@ -102,7 +106,7 @@ class UserService:
 
     def invite_user(self, invite_data: UserInvite) -> UserProfile:
         """
-        Invite a new user (creates user with temporary password).
+        Invite a new user (creates user and sends invitation email with password setup link).
 
         Args:
             invite_data: User invitation data
@@ -111,26 +115,142 @@ class UserService:
             Created user
 
         Raises:
-            ValueError: If email already exists
+            ValueError: If email already exists or SMTP configuration is missing
         """
         # Check if email already exists
         if self.repository.email_exists(invite_data.email):
             raise ValueError("User with this email already exists")
 
-        # Create user with temporary password
+        # Create user without password (they'll set it via email link)
         user_dict = {
             'email': invite_data.email,
             'first_name': invite_data.first_name,
             'last_name': invite_data.last_name,
             'role': invite_data.role,
-            # Temporary
-            'hashed_password': get_password_hash("TempPassword123!"),
+            # Placeholder password - user must set via reset link
+            'hashed_password': get_password_hash("PLACEHOLDER_MUST_RESET"),
             'is_active': True
         }
 
         created_user = self.repository.create(obj_in=user_dict)
 
-        # TODO: Send invitation email with password reset link
+        # Generate password reset token for the new user
+        reset_token = PasswordResetToken(
+            user_id=created_user.id,
+            token=PasswordResetToken.generate_token(),
+            expires_at=PasswordResetToken.get_expiration_time(hours=72)  # 72 hours for invitation
+        )
+        self.db.add(reset_token)
+        self.db.commit()
+
+        # Send invitation email with password setup link
+        try:
+            # Validate SMTP configuration
+            if not settings.SMTP_HOST:
+                raise ValueError("SMTP_HOST is not configured in environment variables")
+            if not settings.SMTP_USER:
+                raise ValueError("SMTP_USER is not configured in environment variables")
+            if not settings.SMTP_PASS:
+                raise ValueError("SMTP_PASS is not configured in environment variables")
+            if not settings.FROM_EMAIL:
+                raise ValueError("FROM_EMAIL is not configured in environment variables")
+
+            # Initialize SMTP service
+            smtp_service = SMTPService(
+                smtp_host=settings.SMTP_HOST,
+                smtp_port=settings.SMTP_PORT,
+                smtp_user=settings.SMTP_USER,
+                smtp_pass=settings.SMTP_PASS,
+                from_email=settings.FROM_EMAIL,
+                smtp_secure=settings.SMTP_SECURE
+            )
+
+            frontend_url = settings.FRONTEND_URL or "http://localhost:3000"
+            setup_link = f"{frontend_url}/reset-password?token={reset_token.token}"
+
+            # Get company info from system configuration (if available)
+            try:
+                from ..routes.auth import get_company_info
+                company_info = get_company_info(self.db)
+                company_name = company_info['company_name']
+                company_email = company_info['company_email']
+                company_phone = company_info['company_phone']
+                company_address = company_info['company_address']
+            except:
+                # Fallback to default values
+                company_name = "CRM Platform"
+                company_email = settings.FROM_EMAIL
+                company_phone = ""
+                company_address = ""
+
+            # Build footer with company contact info
+            footer_contact = []
+            if company_address:
+                footer_contact.append(company_address)
+            if company_email:
+                footer_contact.append(f"Email: {company_email}")
+            if company_phone:
+                footer_contact.append(f"Phone: {company_phone}")
+            footer_text = " | ".join(footer_contact) if footer_contact else ""
+
+            html_content = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <style>
+                    body {{ font-family: Arial, sans-serif; line-height: 1.6; color: #333; }}
+                    .container {{ max-width: 600px; margin: 0 auto; padding: 20px; }}
+                    .header {{ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }}
+                    .content {{ background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }}
+                    .button {{ display: inline-block; padding: 12px 30px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }}
+                    .footer {{ text-align: center; margin-top: 20px; color: #666; font-size: 12px; }}
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h1>Welcome to {company_name}!</h1>
+                    </div>
+                    <div class="content">
+                        <p>Hello {created_user.first_name},</p>
+                        <p>You've been invited to join {company_name}'s CRM platform as a <strong>{created_user.role.replace('_', ' ').title()}</strong>.</p>
+                        <p>To get started, you'll need to set up your password by clicking the button below:</p>
+                        <p style="text-align: center;">
+                            <a href="{setup_link}" class="button">Set Up Your Password</a>
+                        </p>
+                        <p>Or copy and paste this link into your browser:</p>
+                        <p style="word-break: break-all; background: white; padding: 10px; border-radius: 5px;">{setup_link}</p>
+                        <p><strong>This link will expire in 72 hours.</strong></p>
+                        <p>After setting up your password, you'll be able to log in with:</p>
+                        <ul>
+                            <li><strong>Email:</strong> {created_user.email}</li>
+                            <li><strong>Password:</strong> The password you create</li>
+                        </ul>
+                        <p>If you have any questions, please contact your administrator.</p>
+                        <p>Best regards,<br>The {company_name} Team</p>
+                    </div>
+                    <div class="footer">
+                        <p>This is an automated message, please do not reply to this email.</p>
+                        {f"<p>{footer_text}</p>" if footer_text else ""}
+                    </div>
+                </div>
+            </body>
+            </html>
+            """
+
+            smtp_service.send_email(
+                to_email=created_user.email,
+                subject=f"Welcome to {company_name} - Set Up Your Account",
+                html_content=html_content,
+                from_name=company_name
+            )
+
+        except Exception as e:
+            # Log the error but don't fail user creation
+            # The admin can manually send the invitation or provide credentials
+            print(f"Warning: Failed to send invitation email to {created_user.email}: {str(e)}")
+            # Could optionally delete the user here if email sending is critical
+            # For now, we'll keep the user and let admin handle it
 
         return created_user
 
@@ -450,8 +570,8 @@ class UserService:
         # Create user without password
         user_dict = {
             'email': email.lower().strip(),
-            'first_name': first_name.strip() if first_name else '',
-            'last_name': last_name.strip() if last_name else '',
+            'first_name': first_name.strip(),
+            'last_name': last_name.strip(),
             'role': role,
             'hashed_password': None,  # No password for SSO users
             'microsoft_id': microsoft_id,

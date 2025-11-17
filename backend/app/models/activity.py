@@ -15,6 +15,18 @@ class Activity(Base):
     duration_minutes = Column(Integer)
     outcome = Column(String)
 
+    # Calendar/Scheduling fields
+    scheduled_at = Column(DateTime(timezone=True), nullable=True, index=True)
+    end_time = Column(DateTime(timezone=True), nullable=True)
+    location = Column(String(500), nullable=True)
+    meeting_link = Column(Text, nullable=True)
+    attendees = Column(Text, nullable=True)  # JSON array of email addresses
+
+    # Outlook integration fields
+    outlook_event_id = Column(String(255), unique=True, nullable=True, index=True)
+    sync_source = Column(String(20), default='crm')  # 'crm', 'outlook', 'manual'
+    sync_status = Column(String(20), default='not_synced')  # 'synced', 'pending', 'error', 'not_synced'
+
     # Foreign Keys
     contact_id = Column(UUID(as_uuid=True), ForeignKey("contacts.id"))
     deal_id = Column(UUID(as_uuid=True), ForeignKey("deals.id"))
